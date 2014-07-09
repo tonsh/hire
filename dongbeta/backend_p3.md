@@ -19,16 +19,4 @@
 
 1. ```while($i < count($arr))``` 时 count 方法被重复执行（但没重复计算), 可以将 count 在外层赋值或使用 foreach 代替 while 循环。
 
-    因为在这里多想了些东西，就一并提一下吧。count 方法的调用是否需要遍历数组? 倘若 count 的调用都需要遍历数组计算长度，那么时间复杂度为 O(n), 在数组很大时，while($i < count($arr)) 将造成很大的计算浪费；另一种可能是数组的实现有一个长度标识，每次调用 count 直接返回长度值，这样实现的复杂度为 O(1); 刚好今天翻看 PHP 相关的书籍，介绍 HashTable 的部分提到： PHP 的数组也是HashTale 实现的。HashTable 在实现代码如下(c 实现)：
-    
-  ```
-    typedef struct _hashtable {
-        uint nTableSize;
-        unit nTableMask;
-        unit nNumOfElements;    # 记录 HashTable 中元素的个数
-        ... blablabla ...
-    } HashTable;
-  ```
- 
- 看到第三个参数大概能猜到，count 函数不必每次都计算数组长度；所以 while($i < count($arr)) 写法只是重复调用 count 方法并没有反复遍历数组，黑盒测试如下: 
- <script src="https://gist.github.com/tonsh/055a6ac2adfb9ca37985.js"></script>
+重构结果请查看 part3.php

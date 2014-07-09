@@ -7,7 +7,7 @@ date_default_timezone_set('Asia/Shanghai');
 require_once PROJ_DIR . '/config.php';
 
 require_once PROJ_DIR . '/libs/yahoo.api.php';
-require_once PROJ_DIR . '/libs/db.php';
+require_once PROJ_DIR . '/libs/mysql.db.php';
 
 require_once PROJ_DIR . '/libs/common.php';
 require_once PROJ_DIR . '/models/base.php';

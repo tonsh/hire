@@ -53,6 +53,7 @@ class StockController extends BaseController {
         } else {
             $vars = array(
                 'data' => $data,
+                'code' => $code,
                 'starttime' => $starttime,
                 'endtime' => $endtime,
             );

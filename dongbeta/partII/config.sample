@@ -8,7 +8,7 @@
 error_reporting(0);
 
 // 项目域名
-define('PROJ_HOST', 'http://');
+define('PROJ_URL', 'http://');
 
 // Mysql 配置信息
 $database_conf = array(

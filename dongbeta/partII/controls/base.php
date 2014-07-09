@@ -2,7 +2,7 @@
 class BaseController {
 
     public function render($tpl, array $vars=array()) {
-        $var['proj_host'] = PROJ_HOST;
+        $var['proj_url'] = PROJ_URL;
         extract($vars);
 
         include TPL_DIR . '/' . $tpl;

@@ -58,19 +58,20 @@ class StockModel extends BaseModel {
             return $this->get_by_time($code, $starttime, $endtime);
         }
 
-        // 补充前后数据
         $begin = $data[0]['date'];
         $end = $data[count($data) - 1]['date'];
+        if(($startime >= $begin) or ($endtime <= $end)) {
+            return $data;
+        }
+
+        // 补充前后数据
         if($begin > $starttime) {
             $this->update_from_api($code, $starttime, $begin);
-            return $this->get_by_time($code, $starttime, $endtime);
         }
         if($end < $endtime) {
             $this->update_from_api($code, $end, $endtime);
-            return $this->get_by_time($code, $end, $endtime);
         }
-
-        return $data;
+        return $this->get_by_time($code, $starttime, $endtime);
     }
 }
 ?>

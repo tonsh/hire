@@ -20,6 +20,10 @@ class StockModel extends BaseModel {
         $data = $api->get();
 
         foreach($data as $item) {
+            if(!$data or !$item) {
+                continue;
+            }
+
             $where = array(
                 'code' => $code,
                 'date' => $item['date'],

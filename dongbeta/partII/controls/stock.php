@@ -28,7 +28,9 @@ class StockController extends BaseController {
         # TODO 计算平均股价
         $ret = array();
         foreach($data as $item) {
-            $ret[$item['date']] = $item;
+            # 返回毫秒
+            $time = $item['date'] * 1000;
+            $ret[] = array($time, $item['close']);
         }
 
         return $ret;
@@ -52,12 +54,10 @@ class StockController extends BaseController {
             $this->json($data);
         } else {
             $vars = array(
-                'data' => $data,
                 'code' => $code,
-                'starttime' => $starttime,
-                'endtime' => $endtime,
+                'startdate' => strftime('%Y-%m-%d', $starttime),
+                'enddate' => strftime('%Y-%m-%d', $endtime),
             );
-
             $this->render('stock.php', $vars);
         }
     }

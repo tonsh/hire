@@ -72,8 +72,6 @@ class DB {
 
         $ret = array();
         while($row = mysql_fetch_array($result, $result_type)) {
-            var_dump($row);
-            die;
             $ret[] = $row;
         }
 

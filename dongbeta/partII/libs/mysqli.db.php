@@ -29,6 +29,22 @@ class DB {
         return $conn;
     }
 
+    private function auto_type(array $data, array $types) {
+        // 自动类型转换
+        $type_func = array(
+            3 => "intval",
+            4 => "floatval",
+        );
+
+        foreach($type_func as $type => $func) {
+            $keys = isset($types[$type]) ? $types[$type] : array();
+            foreach($keys as $key) {
+                $data[$key] = $func($data[$key]);
+            }
+        }
+        return $data;
+    }
+
     /**
      * 执行 SQL 语句
      */
@@ -41,16 +57,36 @@ class DB {
         return $result;
     }
 
-    public function fetch_one($sql, $field=NULL) {
-        $result = $this->execute($sql);
+    public function fetch_result($result, $type=MYSQL_ASSOC, int $limit=NULL) {
+        $fields = $result->fetch_fields();
 
-        while($row = $result->fetch_array(MYSQL_ASSOC)) {
-            $result->close();
-            return $row;
+        $fields_type = array();
+        foreach($fields as $field) {
+            $fields_type[$field->type][] = $field->name;
+        }
+
+        $ret = array();
+        $count = 0;
+        while($row = $result->fetch_array($type)) {
+            $row = $this->auto_type($row, $fields_type);
+            $ret[] = $row;
+
+            $count += 1;
+            if($limit and $count >= $limit) {
+                $result->close();
+                return $ret;
+            }
         }
 
         $result->close();
-        return NULL;
+        return $ret;
+    }
+
+    public function fetch_one($sql) {
+        $result = $this->execute($sql);
+        $data = $this->fetch_result($result, $limit=1);
+
+        return count($data) > 0 ? $data[0] : NULL;
     }
 
     /**
@@ -65,15 +101,7 @@ class DB {
      */
     public function fetch_all($sql, $result_type=MYSQL_ASSOC) {
         $result = $this->execute($sql);
-
-        $ret = array();
-        while($row = $result->fetch_array($result_type)) {
-            $ret[] = $row;
-        }
-
-        $result->close();
-
-        return $ret;
+        return $this->fetch_result($result);
     }
 
     /**

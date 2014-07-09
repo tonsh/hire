@@ -48,9 +48,12 @@ class YahooAPI {
 
     public function get() {
         $response = Requests::get($this->url);
-        $lines= split(PHP_EOL, $response);
-        # 删除第一行的标题行
-        unset($lines[0]);
+        $lines = array();
+        if($response) {
+            $lines = explode(PHP_EOL, $response);
+            # 删除第一行的标题行
+            unset($lines[0]);
+        }
 
         $ret = array();
         foreach($lines as $line) {
@@ -63,7 +66,7 @@ class YahooAPI {
                 'code' => $this->code,
                 'date' => strtotime($data[0]),
                 'open' => floatval($data[1]),
-                'hight' => floatval($data[2]),
+                'high' => floatval($data[2]),
                 'low' => floatval($data[3]),
                 'close' => floatval($data[4]),
                 'volume' => intval($data[5]),

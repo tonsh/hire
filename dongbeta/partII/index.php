@@ -15,6 +15,8 @@ require_once PROJ_DIR . '/base.model.php';
 require_once PROJ_DIR . '/stock.mod.php';
 require_once PROJ_DIR . '/stock.ctl.php';
 
+# TODO 根据请求的控制器及方法动态执行
+
 $obj = new StockController();
 $obj->on_view();
 ?>

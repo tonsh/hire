@@ -60,7 +60,7 @@ class StockModel extends BaseModel {
 
         // 补充前后数据
         $begin = $data[0]['date'];
-        $end = $data[-1]['date'];
+        $end = $data[count($data) - 1]['date'];
         if($begin > $starttime) {
             $this->update_from_api($code, $starttime, $begin);
             return $this->get_by_time($code, $starttime, $endtime);

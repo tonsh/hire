@@ -2,6 +2,8 @@
 class StockController {
 
     public function on_view() {
+        $code = $_GET['code'];
+
         if(isset($_GET['startdate'])) {
             $starttime = strtotime($_GET['startdate']);
         } else {
@@ -15,7 +17,7 @@ class StockController {
         }
 
         $mod = new StockModel();
-        $data = $mod->get_by_patch('AAPL', $starttime, $endtime);
+        $data = $mod->get_by_patch($code, $starttime, $endtime);
         var_dump($data);
     }
 }

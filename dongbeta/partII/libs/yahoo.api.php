@@ -2,12 +2,12 @@
 
 class Requests {
 
+    /**
+     * 发起 GET 请求
+     * @param $url string   请求的URL
+     * @params string       响应数据
+     */
     public static function get($url) {
-        /**
-         * 发起 GET 请求
-         * @param $url string   请求的URL
-         * @params string       响应数据
-         */
         $handler = curl_init();
 
         curl_setopt($handler, CURLOPT_URL, $url);
@@ -25,16 +25,16 @@ class Requests {
 
 class YahooAPI {
 
+    /**
+     * 抓取 Yahoo API 获取股票数据
+     *
+     * @param $code string          股票名称
+     * @param $start_date int       开始时间时间戳
+     * @param $end_date int         结束时间时间戳
+     * @param $cycle char           时间周期
+     * @return array
+     */
     public function __construct($code, $starttime, $endtime, $cycle='d') {
-        /**
-         * 抓取 Yahoo API 获取股票数据
-         *
-         * @param $code string          股票名称
-         * @param $start_date int       开始时间时间戳
-         * @param $end_date int         结束时间时间戳
-         * @param $cycle char           时间周期
-         * @return array
-         */
 
         $this->code = $code;
         $this->starttime = $starttime;
@@ -101,9 +101,4 @@ class YahooAPI {
         return $cycle;
     }
 }
-
-$starttime = strtotime('2014-01-05');
-$endtime = strtotime('2014-02-01');
-$obj = new YahooAPI('AAPL', $starttime, $endtime, 'w');
-var_dump($obj->get());
 ?>

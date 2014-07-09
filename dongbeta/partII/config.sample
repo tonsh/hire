@@ -1,0 +1,17 @@
+<?php
+/**
+ * 项目配置文件，与运行环境有关
+ */
+
+// 开发环境建议开启错误提示, 如： E_ALL & ~E_NOTICE
+// 生产环境强烈建议禁用错误提示: 0, 
+error_reporting(0);
+
+// Mysql 配置信息
+$database_conf = array(
+    'host' => '',
+    'username' => '',
+    'passwd' => '',
+    'dbname' => '',
+);
+?>

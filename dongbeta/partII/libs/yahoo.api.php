@@ -20,8 +20,6 @@ class Requests {
         return $response;
     }
 
-    //public static function post($url, $data) {
-    //}
 }
 
 
@@ -44,43 +42,50 @@ class YahooAPI {
         $this->cycle = self::check_cycle($cycle);
 
 
-        $url = "http://ichart.yahoo.com/table.csv?" . self.time_params();
+        $url = "http://ichart.yahoo.com/table.csv?" . $this->time_params();
         $this->url = $url;
     }
 
     public function get() {
-        $response = Requests::get($url));
+        $response = Requests::get($this->url);
         $lines= split(PHP_EOL, $response);
+        # 删除第一行的标题行
+        unset($lines[0]);
 
-        $ret = array()
+        $ret = array();
         foreach($lines as $line) {
             $data = str_getcsv($line);
+            if(empty($data) or empty($data[0])) {
+                continue;
+            }
+
             $ret[] = array(
-                'code': $this->code,
-                'date': $data[0],
-                'open': $data[1],
-                'hight': $data[2],
-                'low': $data[3],
-                'close': $data[4],
-                'volume': $data[5],
-                'adj_close': $data[6],
+                'code' => $this->code,
+                'date' => strtotime($data[0]),
+                'open' => floatval($data[1]),
+                'hight' => floatval($data[2]),
+                'low' => floatval($data[3]),
+                'close' => floatval($data[4]),
+                'volume' => intval($data[5]),
+                'adj_close' => floatval($data[6]),
             );
         }
 
-        return $ret
+        return $ret;
     }
 
-    public function time_params() {
+    private function time_params() {
         $params = array();
+        $params['s'] = $this->code;
         $params['g'] = $this->cycle;
 
         $time_array = getdate($this->starttime);
-        $params['a'] = $time_array['month'];
+        $params['a'] = $time_array['mon'] - 1;
         $params['b'] = $time_array['mday'];
         $params['c'] = $time_array['year'];
 
         $time_array = getdate($this->endtime);
-        $params['d'] = $time_array['month'];
+        $params['d'] = $time_array['mon'] - 1;
         $params['e'] = $time_array['mday'];
         $params['f'] = $time_array['year'];
 
@@ -97,10 +102,8 @@ class YahooAPI {
     }
 }
 
-$url = 'http://ichart.yahoo.com/table.csv?s=AAPL&a=11&b=1&c=2013&d=05&e=1&f=2014&g=d';
-//var_dump(Requests::get($url));
-
-$arr = getdate(time());
-echo http_build_query($arr);
-
+$starttime = strtotime('2014-01-05');
+$endtime = strtotime('2014-02-01');
+$obj = new YahooAPI('AAPL', $starttime, $endtime, 'w');
+var_dump($obj->get());
 ?>

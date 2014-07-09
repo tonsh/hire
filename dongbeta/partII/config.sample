@@ -7,6 +7,9 @@
 // 生产环境强烈建议禁用错误提示: 0, 
 error_reporting(0);
 
+// 项目域名
+define('PROJ_HOST', 'http://');
+
 // Mysql 配置信息
 $database_conf = array(
     'host' => '',

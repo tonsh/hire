@@ -60,19 +60,41 @@
 
 	```
 	partII/
-		-- models/	 模型
-		-- controls/ 控制逻辑
-		-- views/    试图
-		-- statics/  静态资源
-		-- temp/	 临时文件 
+		-- models/	    模型
+		-- controls/    控制逻辑
+		-- templates/   试图
+		-- statics/     静态资源
+        -- config.sample 配置文件，修改后重命名为 config.py
+        -- index.php    程序入口文件
+        -- 
 	```
-		
 
-1. 特殊情况，紧急补数
-
-1. 怎样开始？
+1. 安装及访问
+    开发环境: PHP5.5 + Mysql + Linux/Mac OS
 
     ```
-    cp config.dev config.php
+    cp config.sample config.php
     ```
-    修改配置信息为自己的开发环境
+    按注释信息修改配置。
+
+    部署代码之后
+
+    访问: http://{your_host}/index.php?ctl=stock&mt=list&code=AAPL&startdate=2014-06-01&enddate=2014-07-09
+    
+    ```
+    code        股票代码 如: 招商银行编号为 600036.SS
+    startdate   开始日期 格式: %Y-%m-%d
+    enddate     结束日期 格式: %Y-%m-%d
+    ```
+
+1. 其他说明及问题
+
+    * 支持任意股票的查询, 修改URL的code参数即可
+
+    * 因为题中指明用 PHP ＋ Mysql, 由于太长时间没写过 PHP, 为了尽快熟悉，最终决定实现一个简易的 MVC “框架”。也会由代码不规范的地方。
+
+    * "平均股价" 在问题中没有定义。 参考百度百科: 平均股价，是指将多种股票价格加以平均所得到的数值。 题意不明，暂未实现。
+
+    * 数据来源仅支持调用 API, 爬虫未实现。
+
+    * Highchart 趋势图还很简陋，有待改善。

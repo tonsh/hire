@@ -1,6 +1,3 @@
-* From: [https://github.com/dongbeta/hire/blob/develop/backend.md](https://github.com/dongbeta/hire/blob/develop/backend.md)
-
-
 #### Part III
 
 ##### 问题说明：

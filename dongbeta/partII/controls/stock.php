@@ -37,7 +37,15 @@ class StockController extends BaseController {
     }
 
     public function on_index() {
-        $this->render('index.php');
+        $starttime = $this->get_starttime();
+        $endtime = $this->get_endtime();
+        $vars = array(
+            'code' => 'AAPL',
+            'startdate' => strftime('%Y-%m-%d', $starttime),
+            'enddate' => strftime('%Y-%m-%d', $endtime),
+        );
+
+        $this->render('index.php', $vars);
     }
 
     public function on_list() {
@@ -62,4 +70,3 @@ class StockController extends BaseController {
         }
     }
 }
-?>

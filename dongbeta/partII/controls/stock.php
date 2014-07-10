@@ -30,7 +30,7 @@ class StockController extends BaseController {
         foreach($data as $item) {
             # 返回毫秒
             $time = $item['date'] * 1000;
-            $ret[] = array($time, $item['adj_close']);
+            $ret[] = array($time, $item['close']);
         }
 
         return $ret;

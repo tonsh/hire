@@ -194,4 +194,3 @@ class BaseModel {
     // TODO
     public function delete() {}
 }
-?>

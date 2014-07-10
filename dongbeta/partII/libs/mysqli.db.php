@@ -115,4 +115,3 @@ class DB {
         return $this->conn->close();
     }
 }
-?>

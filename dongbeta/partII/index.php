@@ -27,4 +27,3 @@ $method = 'on_' . $method;
 
 $obj = new $ctl();
 $obj->$method();
-?>

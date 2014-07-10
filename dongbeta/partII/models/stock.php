@@ -78,4 +78,3 @@ class StockModel extends BaseModel {
         return $this->get_by_time($code, $starttime, $endtime);
     }
 }
-?>

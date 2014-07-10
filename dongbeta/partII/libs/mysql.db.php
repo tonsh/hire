@@ -89,4 +89,3 @@ class DB {
         return mysql_close($this->conn);
     }
 }
-?>

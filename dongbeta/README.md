@@ -50,9 +50,9 @@ OAuth 授权流程总结: [http://tonsh.github.io/jekyll/update/2014/07/10/oauth
 1. ##### 查询与抓取策略
 
     * 请求特定时间范围 [start, end] 内的股票数据
-    * 先再数据库中查询日起 BETWEEN begin AND end 之间的数据。
+    * 从数据库中查询日期在 [start, end] 之间的数据。
     * 最近数据的日期 latest < end, 则抓取(lastes, end] 时间范围内的数据并存储
-    * 最远数据的日期 begin > start, 则抓取［start, begin) 时间范围内的数据并存储
+    * 最旧数据的日期 begin > start, 则抓取［start, begin) 时间范围内的数据并存储
 
 1. ##### 数据表结构
    详见: partII/yahoo_stock.sql
@@ -71,7 +71,7 @@ OAuth 授权流程总结: [http://tonsh.github.io/jekyll/update/2014/07/10/oauth
 
 1. 安装及访问
 
-    * 开发环境: PHP5.5 + Mysql + Linux/Mac OS
+    * 开发环境: PHP5.5 + Mysql + Linux/Mac OS， 不支持 windows
 
 	* 修改配置信息， 部署代码
 	

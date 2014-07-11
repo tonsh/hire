@@ -6,10 +6,10 @@
 class DBError extends Exception {}
 
 class DB {
-    var $host = '';
-    var $username = '';
-    var $passwd = '';
-    var $dbname = '';
+    private $host = '';
+    private $username = '';
+    private $passwd = '';
+    private $dbname = '';
 
     public function __construct($host, $dbname, $username, $passwd) {
         $this->host = $host;

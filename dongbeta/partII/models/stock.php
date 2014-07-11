@@ -1,8 +1,9 @@
 <?php
 class StockModel extends BaseModel {
-    var $table = 'stock_data';
-    var $fields = array('id', 'code', 'date', 'open', 'high', 'low', 'close',
-                        'volume', 'adj_close', 'created_at', 'updated_at');
+    protected $table = 'stock_data';
+    protected $fields = array('id', 'code', 'date', 'open', 'high', 'low',
+                              'close', 'volume', 'adj_close',
+                              'created_at', 'updated_at');
 
     public function __construct() {
         parent::__construct();

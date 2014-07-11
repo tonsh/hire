@@ -8,9 +8,9 @@
  */
 
 class BaseModel {
-    var $db = null;
-    var $table = '';
-    var $fields = array();
+    protected $db = null;
+    protected $table = '';
+    protected $fields = array();
 
     public function __construct() {
         global $database_conf;
